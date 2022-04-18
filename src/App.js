@@ -1,5 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
+import "./custom.scss";
 import PagesSwitch from "./PagesSwitch";
 
 function App() {
