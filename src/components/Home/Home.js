@@ -1,5 +1,7 @@
 import React from "react";
 import "./Home.scss";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import hero from "../../assets/hero.png";
 import about1 from "../../assets/about-1.jpg";
 import about2 from "../../assets/about-2.jpg";
@@ -34,8 +36,27 @@ import {
   FaInstagram,
   FaQuoteLeft,
 } from "react-icons/fa";
+import Testimonial from "./Testimonial";
 
 function Home() {
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
   return (
     <>
       <div className="container-xxl py-5 bg-dark hero-header mb-5">
@@ -1043,88 +1064,36 @@ function Home() {
             </h5>
             <h1 className="mb-5">Our Clients Say!!!</h1>
           </div>
-          <div className="owl-carousel testimonial-carousel">
-            <div className="testimonial-item bg-transparent border rounded p-4">
-              <i className="fa fa-2x primaryColor mb-3">
-                <FaQuoteLeft size={30} />
-              </i>
-              <p>
-                Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor
-                stet amet eirmod eos labore diam
-              </p>
-              <div className="d-flex align-items-center">
-                <img
-                  className="img-fluid flex-shrink-0 rounded-circle"
-                  src={testimonial1}
-                  style={{ width: "50px", height: "50px" }}
-                />
-                <div className="ps-3">
-                  <h5 className="mb-1">Client Name</h5>
-                  <small>Profession</small>
-                </div>
-              </div>
-            </div>
-            <div className="testimonial-item bg-transparent border rounded p-4">
-              <i className="fa fa-2x primaryColor mb-3">
-                <FaQuoteLeft size={30} />
-              </i>
-              <p>
-                Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor
-                stet amet eirmod eos labore diam
-              </p>
-              <div className="d-flex align-items-center">
-                <img
-                  className="img-fluid flex-shrink-0 rounded-circle"
-                  src={testimonial2}
-                  style={{ width: "50px", height: "50px" }}
-                />
-                <div className="ps-3">
-                  <h5 className="mb-1">Client Name</h5>
-                  <small>Profession</small>
-                </div>
-              </div>
-            </div>
-            <div className="testimonial-item bg-transparent border rounded p-4">
-              <i className="fa fa-2x primaryColor mb-3">
-                <FaQuoteLeft size={30} />
-              </i>
-              <p>
-                Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor
-                stet amet eirmod eos labore diam
-              </p>
-              <div className="d-flex align-items-center">
-                <img
-                  className="img-fluid flex-shrink-0 rounded-circle"
-                  src={testimonial3}
-                  style={{ width: "50px", height: "50px" }}
-                />
-                <div className="ps-3">
-                  <h5 className="mb-1">Client Name</h5>
-                  <small>Profession</small>
-                </div>
-              </div>
-            </div>
-            <div className="testimonial-item bg-transparent border rounded p-4">
-              <i className="fa fa-2x primaryColor mb-3">
-                <FaQuoteLeft size={30} />
-              </i>
-              <p>
-                Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor
-                stet amet eirmod eos labore diam
-              </p>
-              <div className="d-flex align-items-center">
-                <img
-                  className="img-fluid flex-shrink-0 rounded-circle"
-                  src={testimonial4}
-                  style={{ width: "50px", height: "50px" }}
-                />
-                <div className="ps-3">
-                  <h5 className="mb-1">Client Name</h5>
-                  <small>Profession</small>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Carousel responsive={responsive} autoPlay={false}>
+            <Testimonial
+              src={testimonial1}
+              name={"Client Name"}
+              text={
+                "Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam"
+              }
+            />
+            <Testimonial
+              src={testimonial2}
+              name={"Client Name"}
+              text={
+                "Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam"
+              }
+            />
+            <Testimonial
+              src={testimonial3}
+              name={"Client Name"}
+              text={
+                "Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam"
+              }
+            />
+            <Testimonial
+              src={testimonial4}
+              name={"Client Name"}
+              text={
+                "Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam"
+              }
+            />
+          </Carousel>
         </div>
       </div>
       {/* <!-- Testimonial End --> */}
