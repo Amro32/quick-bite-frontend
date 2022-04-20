@@ -8,6 +8,8 @@ import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import AboutPage from "./components/About/AboutPage";
 import Contact from "./components/Contact/Contact";
+import MenuPage from "./components/Menu/MenuPage";
+import Book from "./components/Book/Book";
 
 function PagesSwitch() {
   const location = useLocation();
@@ -28,6 +30,8 @@ function PagesSwitch() {
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/about" exact element={<AboutPage />} />
         <Route path="/contact" exact element={<Contact />} />
+        <Route path="/menu" exact element={<MenuPage />} />
+        <Route path="/book" exact element={<Book />} />
       </Routes>
 
       {/* Footer component*/}

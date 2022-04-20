@@ -3,11 +3,16 @@
 }
 
 a {
-  color: initial !important;
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 .secondaryColor {
   color: #0f172b !important;
+}
+
+.bg-dark2 {
+  background-color: #0f172b !important;
 }
 
 .title {

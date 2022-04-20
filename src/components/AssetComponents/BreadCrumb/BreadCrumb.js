@@ -8,12 +8,12 @@ function BreadCrumb({ title, pageName }) {
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-center text-uppercase">
             <li class="breadcrumb-item">
-              <a href="#" className="text-decoration-none primaryColor">
+              <a href="#" className="primaryColor">
                 Home
               </a>
             </li>
             <li class="breadcrumb-item">
-              <a href="#" className="text-decoration-none primaryColor">
+              <a href="#" className="primaryColor">
                 Pages
               </a>
             </li>

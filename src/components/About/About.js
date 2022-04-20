@@ -94,9 +94,9 @@ function About() {
                 </div>
               </div>
             </div>
-            <a className="btn primaryBtn py-3 px-5 mt-2" href="">
+            {/* <a className="btn primaryBtn py-3 px-5 mt-2" href="">
               Read More
-            </a>
+            </a> */}
           </div>
         </div>
       </div>

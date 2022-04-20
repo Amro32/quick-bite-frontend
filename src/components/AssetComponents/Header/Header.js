@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.scss";
 import { FaUtensils } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -26,45 +27,22 @@ function Header() {
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <div className="navbar-nav ms-auto py-0 pe-4">
-            <a href="index.html" className="nav-item nav-link active">
+            <Link to="/" className="nav-item nav-link active">
               Home
-            </a>
-            <a href="about.html" className="nav-item nav-link">
+            </Link>
+            <Link to="/about" className="nav-item nav-link">
               About
-            </a>
-            <a href="service.html" className="nav-item nav-link">
-              Service
-            </a>
-            <a href="menu.html" className="nav-item nav-link">
+            </Link>
+            <Link to="/menu" className="nav-item nav-link">
               Menu
-            </a>
-            <div className="nav-item dropdown">
-              <a
-                href="#"
-                className="nav-link dropdown-toggle"
-                data-bs-toggle="dropdown"
-              >
-                Pages
-              </a>
-              <div className="dropdown-menu m-0">
-                <a href="booking.html" className="dropdown-item">
-                  Booking
-                </a>
-                <a href="team.html" className="dropdown-item">
-                  Our Team
-                </a>
-                <a href="testimonial.html" className="dropdown-item">
-                  Testimonial
-                </a>
-              </div>
-            </div>
-            <a href="contact.html" className="nav-item nav-link">
+            </Link>
+            <Link to="/contact" className="nav-item nav-link">
               Contact
-            </a>
+            </Link>
           </div>
-          <a href="" className="btn btn-primary primaryBtn py-2 px-4">
+          <Link to="/book" className="btn btn-primary primaryBtn py-2 px-4">
             Book A Table
-          </a>
+          </Link>
         </div>
       </nav>
     </div>
