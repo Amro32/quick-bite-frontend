@@ -6,6 +6,8 @@ import Footer from "./components/AssetComponents/Footer/Footer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import AboutPage from "./components/About/AboutPage";
+import Contact from "./components/Contact/Contact";
 
 function PagesSwitch() {
   const location = useLocation();
@@ -24,6 +26,8 @@ function PagesSwitch() {
         <Route path="/" exact element={<Home />} />
         <Route path="/login" exact element={<Login />} />
         <Route path="/signup" exact element={<Signup />} />
+        <Route path="/about" exact element={<AboutPage />} />
+        <Route path="/contact" exact element={<Contact />} />
       </Routes>
 
       {/* Footer component*/}

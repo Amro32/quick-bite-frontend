@@ -7,9 +7,12 @@ function Header() {
     <div className="container-xxl position-relative p-0">
       <nav className="navbar navbar-expand-lg navbar-dark px-4 px-lg-5 py-3 py-lg-0 customNav">
         <a href="" className="navbar-brand p-0">
-          <h1 className="primaryColor m-0">
-            <FaUtensils color={"var(--primary)"} />
-            Restoran
+          <h1 className="primaryColor m-0 title logo">
+            <FaUtensils
+              color={"var(--primary)"}
+              style={{ marginRight: "1rem" }}
+            />
+            <div>Restoran</div>
           </h1>
           {/* <img src="img/logo.png" alt="Logo"> */}
         </a>
