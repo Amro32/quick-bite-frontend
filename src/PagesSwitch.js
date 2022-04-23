@@ -5,7 +5,6 @@ import Header from "./components/AssetComponents/Header/Header";
 import Footer from "./components/AssetComponents/Footer/Footer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
-import Signup from "./components/Signup/Signup";
 import AboutPage from "./components/About/AboutPage";
 import Contact from "./components/Contact/Contact";
 import MenuPage from "./components/Menu/MenuPage";
@@ -21,13 +20,12 @@ function PagesSwitch() {
   return (
     <Suspense fallback={<Loading />}>
       {/* Header component */}
-      <Header />
+      {location.pathname !== "/login" && <Header />}
 
       <Routes>
         {/* Home page */}
         <Route path="/" exact element={<Home />} />
         <Route path="/login" exact element={<Login />} />
-        <Route path="/signup" exact element={<Signup />} />
         <Route path="/about" exact element={<AboutPage />} />
         <Route path="/contact" exact element={<Contact />} />
         <Route path="/menu" exact element={<MenuPage />} />
@@ -35,7 +33,7 @@ function PagesSwitch() {
       </Routes>
 
       {/* Footer component*/}
-      <Footer />
+      {location.pathname !== "/login" && <Footer />}
     </Suspense>
   );
 }

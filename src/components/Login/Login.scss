@@ -1,0 +1,512 @@
+body {
+  // because body on other pages has padding and we don't want it here
+  padding: 0;
+}
+
+.Login_Container {
+  background: url("../../assets/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  .slider {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-left: 0;
+    position: absolute;
+    transition: 0.9s;
+  }
+
+  .error {
+    color: var(--secondary-color);
+    margin: 1rem 0;
+  }
+
+  .containerr {
+    width: 200%;
+    height: 100%;
+    margin-left: 100%;
+    position: relative;
+    left: 0;
+    left: -100%;
+    background: #fff;
+    transition: 0.9s;
+  }
+  .containerr.slide {
+    margin-left: 0;
+  }
+
+  .left,
+  .right {
+    width: 50.1%;
+    /* width is 50.1% (not 50%) to avoid weird visual glitching that usually happens on exact measures */
+    height: 100%;
+    position: absolute;
+  }
+
+  .left {
+    left: 0;
+    box-shadow: inset -20px 0px 20px -15px #2f247e1a;
+  }
+
+  .right {
+    right: 0;
+    box-shadow: inset 20px 0px 20px -15px #2f247e1a;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 30rem;
+    padding: 1rem;
+    margin: 0 auto;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all ease 0.9s;
+  }
+  .content.login {
+    top: 0;
+    transform: translate(-50%, -120%);
+  }
+  .content.login.active {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .content.recover {
+    top: 120%;
+    transform: translate(-50%, 0);
+  }
+  .content.recover.active {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    color: var(--title-color);
+  }
+
+  .caption {
+    color: #000;
+    opacity: 0.5;
+    font-size: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .valid {
+    color: var(--valid-color) !important;
+    border-color: var(--valid-color) !important;
+  }
+
+  .invalid {
+    color: var(--invalid-color) !important;
+    border-color: var(--invalid-color) !important;
+  }
+
+  .login-with-google {
+    width: 100%;
+    height: 3.25rem;
+    background: #fff;
+    justify-content: center;
+    box-shadow: 0px 0px 20px #2f247e26 !important;
+    border-radius: 10px !important;
+    color: #000 !important;
+    font-size: 1rem !important;
+    font-family: var(--font-family) !important;
+  }
+
+  .or {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    font-size: 1rem;
+    margin: 1.25rem 0 0.75rem 0;
+    text-align: center;
+    color: var(--title-color);
+  }
+  .or::before,
+  .or::after {
+    content: "";
+    background: #000000;
+    opacity: 0.1;
+    width: 15rem;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+  }
+  .or::after {
+    left: calc(50% + 1rem);
+  }
+  .or::before {
+    right: calc(50% + 1rem);
+  }
+
+  .info {
+    position: relative;
+  }
+
+  .row2 {
+    display: flex;
+  }
+
+  .label {
+    font-size: 1rem;
+    color: var(--title-color);
+    transition: 0.4s;
+  }
+
+  .input {
+    width: 100%;
+    border: none;
+    background-color: #fff;
+    opacity: 0.5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #2f247e26;
+    transition: 0.4s;
+    height: 3.25rem;
+    color: var(--title-color);
+    padding: 0 3.5rem 0 1.5rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    position: relative;
+  }
+  .input::placeholder {
+    color: var(--text-color);
+  }
+  .input:focus {
+    outline: none;
+  }
+  .input.hover {
+    border-color: var(--secondary-color);
+  }
+  .input.active {
+    border-top: none;
+    border-color: var(--secondary-color);
+  }
+
+  .password {
+    padding-right: 5rem;
+    /* password inputs have more padding for the eye-icons */
+  }
+
+  .button {
+    width: 100%;
+    background-color: var(--primary-color);
+    font-size: 1rem;
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    padding: 0.9rem;
+    text-transform: capitalize;
+    margin: 1rem 0 0.25rem 0;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .button:hover {
+    background-color: #2f247ed0;
+  }
+
+  .input-icon {
+    position: absolute;
+    right: 1rem;
+    transform: translateY(1.3rem);
+    font-size: 2rem;
+    opacity: 0;
+    transition: 0.4s;
+  }
+
+  .validation-icon {
+    transition: 0.4s;
+  }
+  .validation-icon.active {
+    opacity: 1;
+  }
+
+  .password-eye {
+    opacity: 1;
+    position: absolute;
+    z-index: 2;
+    color: var(--primary-color);
+  }
+  .password-eye.hover {
+    color: var(--secondary-color);
+  }
+  .password-eye.active {
+    color: var(--secondary-color);
+  }
+  .password-eye.visible .password-eye-line {
+    opacity: 0;
+  }
+
+  .password-eye-line {
+    position: absolute;
+    transform: translateX(-2rem);
+    bottom: 0.812px;
+  }
+
+  /* password validation icons are pushed more to the right to give space for the eye-icons */
+  .password-icon {
+    right: 3rem;
+  }
+
+  .presubmition-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    font-size: 0.75rem;
+    padding: 0 0.5rem;
+    margin: 0.5rem 0;
+  }
+
+  .forgot-pass {
+    float: right;
+    text-decoration: underline;
+    color: var(--secondary-color);
+    cursor: pointer;
+  }
+
+  .switch {
+    margin-top: 0.5rem;
+    color: var(--title-color);
+    font-size: 0.75rem;
+  }
+  .switch span:nth-of-type(1) {
+    color: #9d9c9c;
+  }
+  .switch span:nth-of-type(1) .slide-button {
+    color: var(--secondary-color);
+  }
+  .switch span:nth-of-type(2) {
+    float: right;
+  }
+
+  .slide-button {
+    color: var(--secondary-color);
+    cursor: pointer;
+  }
+
+  .recovery-details {
+    padding: 0 0.5rem;
+    margin: 0 0 1.5rem 0;
+    color: var(--text-color);
+  }
+
+  .send-verification {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .new-account {
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .new-account span {
+    cursor: pointer;
+    transition: 0.25s;
+  }
+  .new-account span:hover {
+    color: var(--primary-color);
+  }
+
+  .back-to-login {
+    float: right;
+    margin-right: 0.5rem;
+    color: var(--secondary-color);
+    transition: 0.25s;
+  }
+
+  .password-requirements-container {
+    height: 0;
+    /* this container's changing height is what gives the password requirements list the expand/collapse effect */
+    transition: all 0.4s ease-in-out;
+  }
+  .password-requirements-container.active {
+    height: clamp(85px, 11vh, 95px);
+    margin: 5px 0;
+  }
+
+  .password-requirements {
+    list-style: none;
+    font-size: 0.75rem;
+    margin: 0;
+    height: 0;
+    padding-left: 1.75rem;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+  }
+  .password-requirements.active {
+    height: 100%;
+  }
+  .password-requirements * {
+    transition: 0.4s;
+  }
+  .password-requirements * i {
+    transition: 0.125s;
+  }
+
+  .tos {
+    width: auto;
+    height: 60px;
+    margin: 0.5rem 0;
+    padding: 0 0.5rem;
+    font-size: 9.7px;
+  }
+  .tos .tos-text {
+    width: calc(100% - 2rem);
+  }
+  .tos .tos-text a {
+    text-decoration: underline;
+    color: var(--secondary-color);
+  }
+  .tos .checkmark {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+  .tos .checkmark::after {
+    width: 0.5rem;
+    height: 1rem;
+  }
+
+  /* a tooltip will be shown only on devices that can have hover effects */
+  @media (hover: hover) {
+    .password-eye:hover [data-tooltip]::before,
+    .password-eye:hover [data-tooltip]:after {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(2.25rem);
+    }
+
+    [data-tooltip] {
+      text-transform: capitalize;
+      font-style: normal;
+    }
+    [data-tooltip]::before,
+    [data-tooltip]::after {
+      position: absolute;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s;
+      right: 0;
+      z-index: 2;
+    }
+    [data-tooltip]::before {
+      margin-top: 12px;
+      width: 120px;
+      padding: 7px;
+      border-radius: 5px;
+      background-color: var(--primary-color);
+      color: #fff;
+      content: attr(data-tooltip);
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+    [data-tooltip]::after {
+      margin-left: -15px;
+      border-bottom: 15px solid var(--primary-color);
+      border-right: 15px solid transparent;
+      border-left: 15px solid transparent;
+      content: "";
+    }
+  }
+  /* animation class for invalid sumbissions of a form that will be added with javascript */
+  .invalid-submission {
+    animation: shake 0.825s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      margin: 0 1.5px 0 -1.5px;
+    }
+    20%,
+    80% {
+      margin: 0 -3px 0 3px;
+    }
+    30%,
+    50%,
+    70% {
+      margin: 0 6px 0 -6px;
+    }
+    40%,
+    60% {
+      margin: 0 -6px 0 6px;
+    }
+  }
+  /* for extra small devices */
+  @media (max-width: 355px) {
+    :root {
+      --large-font-size: 2.5rem;
+      --medium-font-size: 0.825rem;
+      --small-font-size: 0.5rem;
+    }
+
+    .checkmark-label .checkmark::after {
+      width: 3.75px;
+      height: 7.5px;
+      transform: translate(-50%, calc(-50% - 1px)) rotate(45deg);
+    }
+
+    .label-wrapper {
+      transform: translateY(30px);
+    }
+    .label-wrapper.active {
+      transform: translateY(1px);
+      font-size: 0.75rem;
+    }
+
+    .label.active::after {
+      height: 2px;
+    }
+
+    .border-corner-cover {
+      border-width: 2px;
+    }
+
+    .input {
+      border-width: 2px;
+    }
+
+    .input-icon {
+      transform: translateY(1.5rem);
+      font-size: 1.5rem;
+    }
+
+    .password-icon {
+      right: 3rem;
+    }
+
+    .password-eye-line {
+      transform: translateX(-1.5rem);
+    }
+
+    .password-requirements-container.active {
+      height: 48px;
+    }
+
+    .tos {
+      font-size: 2.42vw;
+    }
+    .tos .checkmark::after {
+      width: 0.5rem;
+      height: 1rem;
+      transform: translate(-50%, calc(-50% - 2px)) rotate(45deg);
+    }
+  }
+  @media (min-width: 968px) {
+    /* smaller slider on bigger screens */
+    .slider {
+      width: 50%;
+    }
+    .slider.slide {
+      margin-left: 50%;
+    }
+  }
+
+  /*# sourceMappingURL=styles.css.map */
+}
