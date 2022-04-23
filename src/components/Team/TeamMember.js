@@ -12,17 +12,15 @@ function TeamMember({ name, role, src }) {
         <small>{role}</small>
         <div className="d-flex justify-content-center mt-3">
           <a className="btn btn-square primaryBtn mx-1" href="">
-            <i className="fab fa-facebook-f">
-              <FaFacebookF />
-            </i>
+            <FaFacebookF />
           </a>
           <a className="btn btn-square primaryBtn mx-1" href="">
-            <i className="fab fa-twitter">
+            <i className="fab">
               <FaTwitter />
             </i>
           </a>
           <a className="btn btn-square primaryBtn mx-1" href="">
-            <i className="fab fa-instagram">
+            <i className="fab">
               <FaInstagram />
             </i>
           </a>

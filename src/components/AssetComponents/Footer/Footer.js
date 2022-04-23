@@ -42,22 +42,16 @@ function Footer() {
             <h4 className="section-title ff-secondary text-start primaryColor fw-normal mb-4">
               Contact
             </h4>
-            <p className="mb-2">
-              <i className="fa me-3">
-                <FaMapMarkerAlt />
-              </i>
+            <p className="d-flex align-items-center mb-2">
+              <FaMapMarkerAlt className="me-3" />
               123 Street, New York, USA
             </p>
-            <p className="mb-2">
-              <i className="fa me-3">
-                <FaPhoneAlt />
-              </i>
+            <p className="d-flex align-items-center mb-2">
+              <FaPhoneAlt className="me-3" />
               +012 345 67890
             </p>
-            <p className="mb-2">
-              <i className="fa me-3">
-                <FaEnvelope />
-              </i>
+            <p className="d-flex align-items-center mb-2">
+              <FaEnvelope className="me-3" />
               info@example.com
             </p>
             <div className="d-flex pt-2">

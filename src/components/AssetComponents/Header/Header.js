@@ -13,7 +13,7 @@ function Header() {
               color={"var(--primary)"}
               style={{ marginRight: "1rem" }}
             />
-            <div>Restoran</div>
+            <div>Quick Bite</div>
           </h1>
           {/* <img src="img/logo.png" alt="Logo"> */}
         </a>
@@ -40,8 +40,8 @@ function Header() {
               Contact
             </Link>
           </div>
-          <Link to="/book" className="btn btn-primary primaryBtn py-2 px-4">
-            Book A Table
+          <Link to="/login" className="btn btn-primary primaryBtn py-2 px-4">
+            Login
           </Link>
         </div>
       </nav>

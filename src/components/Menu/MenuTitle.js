@@ -10,7 +10,7 @@ function MenuTitle({ href, title, subtitle, Icon, active }) {
         data-bs-toggle="pill"
         href={href}
       >
-        <i className="fa fa-coffee fa-2x primaryColor">
+        <i className="fa fa-2x primaryColor">
           <Icon size={30} />
         </i>
         <div className="ps-3">

@@ -48,10 +48,7 @@ function About() {
               About Us
             </h5>
             <h1 className="mb-4 title">
-              Welcome to{" "}
-              <i className="fa fa-utensils primaryColor me-2">
-                <FaUtensils />
-              </i>
+              Welcome to <FaUtensils className="fa primaryColor me-2" />
               Quick Bite
             </h1>
             <p className="mb-4">
