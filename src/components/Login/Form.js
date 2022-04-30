@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUtensils } from "react-icons/fa";
-// import { login, signup } from "../../redux/user/userActions";
+import { login } from "../../redux/user/userActions";
 
 //todo: finalize google login
 
@@ -24,7 +24,7 @@ const Form = ({ isLogin, title, caption, func }) => {
         email: formData.email,
         password: formData.password,
       };
-      // dispatch(login(data, navigate));
+      dispatch(login(data, navigate));
     } else {
       // dispatch(signup(formData));
     }
@@ -67,11 +67,11 @@ const Form = ({ isLogin, title, caption, func }) => {
     setGoogleError("There was an error signing in with google.");
   };
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate("/");
-  //   }
-  // }, [isAuthenticated]);
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className={isLogin ? "left" : "right"} id={isLogin ? "left" : "right"}>

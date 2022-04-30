@@ -1,12 +1,23 @@
 import setAuthToken from "../../utils/setAuthToken";
-import { LOGIN_REQUEST, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "./userTypes";
+import {
+  LOGIN_REQUEST,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAIL,
+  AUTH,
+} from "./userTypes";
 
-export const initialState = {
+const initialState = {
   user: {},
   token: "",
-  isAutheticated: false,
+  isAuthenticated: false,
   loading: false,
   error: "",
+  error1: "",
+  response: "",
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -15,7 +26,7 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error1: "",
+        error: "",
       };
 
     case LOGIN_SUCCESS:
@@ -25,9 +36,8 @@ export const userReducer = (state = initialState, action) => {
         loading: false,
         user: action.payloadData,
         token: action.payloadToken,
-        isAutheticated: true,
+        isAuthenticated: true,
         error: "",
-        error1: "",
       };
 
     case LOGIN_FAIL:
@@ -36,22 +46,43 @@ export const userReducer = (state = initialState, action) => {
         loading: false,
         user: {},
         token: "",
-        isAutheticated: false,
-        error: {
-          email: action.payload.email,
-          password: action.payload.password,
-        },
-        error1: action.payload,
+        isAuthenticated: false,
+        error: action.payload,
       };
 
-    case LOGOUT:
+    case SIGNUP_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error1: "",
+        response: "",
+      };
+
+    case SIGNUP_SUCCESS:
       return {
         ...state,
         loading: false,
-        user: {},
-        token: "",
-        isAutheticated: false,
+        error1: "",
+        response: "A message has been sent to your email for verification!",
       };
+
+    case SIGNUP_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error1: action.payload,
+      };
+
+    case AUTH:
+      return {
+        ...state,
+        user: action.data.result,
+        token: action.data.token,
+        isAuthenticated: true,
+      };
+
+    case LOGOUT:
+      return initialState;
     default:
       return state;
   }

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import hero from "../../assets/hero.png";
@@ -33,6 +34,7 @@ import TeamMember from "../Team/TeamMember";
 import MenuTitle from "../Menu/MenuTitle";
 import MenuItem from "../Menu/MenuItem";
 import { Link } from "react-router-dom";
+import { getFeedbacks } from "../../redux/feedback/feedbackActions";
 
 function Home() {
   const responsive = {
@@ -74,6 +76,13 @@ function Home() {
       icon: FaUtensils,
     },
   ];
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFeedbacks());
+  }, []);
+
   return (
     <>
       <div className="container-xxl py-5 bg-dark hero-header mb-5">
