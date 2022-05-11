@@ -1,6 +1,6 @@
 import React from "react";
 
-function MenuItem({ name, description, src, price, currency }) {
+function MenuItem({ name, description, src, price, currency, sale }) {
   return (
     <div className="col-lg-6">
       <div className="d-flex align-items-center">
@@ -15,7 +15,13 @@ function MenuItem({ name, description, src, price, currency }) {
             <span>{name}</span>
             <span className="primaryColor">
               {currency}
-              {price}
+              {sale ? (
+                <span>
+                  {(price - sale).toFixed(2)}&nbsp;<strike>{price}</strike>
+                </span>
+              ) : (
+                price
+              )}
             </span>
           </h5>
           <small className="fst-italic">{description}</small>

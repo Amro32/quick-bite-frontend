@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import hero from "../../assets/hero.png";
@@ -35,8 +35,10 @@ import MenuTitle from "../Menu/MenuTitle";
 import MenuItem from "../Menu/MenuItem";
 import { Link } from "react-router-dom";
 import { getFeedbacks } from "../../redux/feedback/feedbackActions";
+import { getMenus } from "../../redux/menu/menuActions";
 
 function Home() {
+  // Carousel configuration
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -56,31 +58,34 @@ function Home() {
     },
   };
 
-  const menus = [
-    {
-      id: 1,
-      type: "Popular",
-      name: "Breakfast",
-      icon: FaCoffee,
-    },
-    {
-      id: 2,
-      type: "Special",
-      name: "Launch",
-      icon: FaHamburger,
-    },
-    {
-      id: 3,
-      type: "Lovely",
-      name: "Dinner",
-      icon: FaUtensils,
-    },
-  ];
+  // menus data
+  const { menus } = useSelector((state) => state.menuReducer);
+  // const menus = [
+  //   {
+  //     id: 1,
+  //     type: "Popular",
+  //     name: "Breakfast",
+  //     icon: FaCoffee,
+  //   },
+  //   {
+  //     id: 2,
+  //     type: "Special",
+  //     name: "Launch",
+  //     icon: FaHamburger,
+  //   },
+  //   {
+  //     id: 3,
+  //     type: "Lovely",
+  //     name: "Dinner",
+  //     icon: FaUtensils,
+  //   },
+  // ];
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getFeedbacks());
+    dispatch(getMenus());
   }, []);
 
   return (
@@ -204,14 +209,13 @@ function Home() {
                     title={menu.type}
                     subtitle={menu.name}
                     active={i === 0 ? "active" : null}
-                    Icon={menu.icon}
                     key={i}
                   />
                 );
               })}
             </ul>
             <div className="tab-content">
-              {menus.map((m, i) => {
+              {menus.map((menu, i) => {
                 return (
                   <div
                     id={"tab-" + i}
@@ -221,78 +225,19 @@ function Home() {
                     key={i}
                   >
                     <div className="row g-4">
-                      <MenuItem
-                        src={menu1}
-                        name={"Chicken Burger"}
-                        description={
-                          "Ipsum ipsum clita erat amet dolor justo diam"
-                        }
-                        price={115}
-                        currency={"$"}
-                      />
-                      <MenuItem
-                        src={menu2}
-                        name={"Chicken Burger"}
-                        description={
-                          "Ipsum ipsum clita erat amet dolor justo diam"
-                        }
-                        price={115}
-                        currency={"$"}
-                      />
-                      <MenuItem
-                        src={menu3}
-                        name={"Chicken Burger"}
-                        description={
-                          "Ipsum ipsum clita erat amet dolor justo diam"
-                        }
-                        price={115}
-                        currency={"$"}
-                      />
-                      <MenuItem
-                        src={menu4}
-                        name={"Chicken Burger"}
-                        description={
-                          "Ipsum ipsum clita erat amet dolor justo diam"
-                        }
-                        price={115}
-                        currency={"$"}
-                      />
-                      <MenuItem
-                        src={menu5}
-                        name={"Chicken Burger"}
-                        description={
-                          "Ipsum ipsum clita erat amet dolor justo diam"
-                        }
-                        price={115}
-                        currency={"$"}
-                      />
-                      <MenuItem
-                        src={menu6}
-                        name={"Chicken Burger"}
-                        description={
-                          "Ipsum ipsum clita erat amet dolor justo diam"
-                        }
-                        price={115}
-                        currency={"$"}
-                      />
-                      <MenuItem
-                        src={menu7}
-                        name={"Chicken Burger"}
-                        description={
-                          "Ipsum ipsum clita erat amet dolor justo diam"
-                        }
-                        price={115}
-                        currency={"$"}
-                      />
-                      <MenuItem
-                        src={menu8}
-                        name={"Chicken Burger"}
-                        description={
-                          "Ipsum ipsum clita erat amet dolor justo diam"
-                        }
-                        price={115}
-                        currency={"$"}
-                      />
+                      {menu?.items?.data?.map((item, j) => {
+                        return (
+                          <MenuItem
+                            src={menu1}
+                            name={item.name}
+                            description={item.details}
+                            price={item.base_price}
+                            currency={"$"}
+                            key={j}
+                            sale={item.sale}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
                 );

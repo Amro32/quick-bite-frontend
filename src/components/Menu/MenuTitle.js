@@ -1,6 +1,6 @@
 import React from "react";
 
-function MenuTitle({ href, title, subtitle, Icon, active }) {
+function MenuTitle({ href, title, subtitle, active }) {
   return (
     <li className="nav-item">
       <a
@@ -10,9 +10,9 @@ function MenuTitle({ href, title, subtitle, Icon, active }) {
         data-bs-toggle="pill"
         href={href}
       >
-        <i className="fa fa-2x primaryColor">
+        {/* <i className="fa fa-2x primaryColor">
           <Icon size={30} />
-        </i>
+        </i> */}
         <div className="ps-3">
           <small className="text-body">{title}</small>
           <h6 className="mt-n1 mb-0">{subtitle}</h6>
