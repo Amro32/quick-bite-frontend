@@ -2,12 +2,14 @@ import React from "react";
 import "./Header.scss";
 import { FaUtensils } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const { isAuthenticated } = useSelector((state) => state.userReducer);
   return (
     <div className="container-xxl position-relative p-0">
       <nav className="navbar navbar-expand-lg navbar-dark px-4 px-lg-5 py-3 py-lg-0 customNav">
-        <a href="" className="navbar-brand p-0">
+        <Link to="/" className="navbar-brand p-0 nav-link">
           <h1 className="primaryColor m-0 title logo">
             <FaUtensils
               color={"var(--primary)"}
@@ -16,7 +18,7 @@ function Header() {
             <div>Quick Bite</div>
           </h1>
           {/* <img src="img/logo.png" alt="Logo"> */}
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -40,9 +42,15 @@ function Header() {
               Contact
             </Link>
           </div>
-          <Link to="/login" className="btn btn-primary primaryBtn py-2 px-4">
-            Login
-          </Link>
+          {!isAuthenticated ? (
+            <Link to="/login" className="btn btn-primary primaryBtn py-2 px-4">
+              Login
+            </Link>
+          ) : (
+            <button className="btn btn-primary primaryBtn py-2 px-4">
+              Welcome!
+            </button>
+          )}
         </div>
       </nav>
     </div>

@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUtensils } from "react-icons/fa";
-import { login } from "../../redux/user/userActions";
+import { login, signup } from "../../redux/user/userActions";
+import { AUTH } from "../../redux/user/userTypes";
 
 //todo: finalize google login
 
@@ -24,9 +25,9 @@ const Form = ({ isLogin, title, caption, func }) => {
         email: formData.email,
         password: formData.password,
       };
-      dispatch(login(data, navigate));
+      dispatch(login(data));
     } else {
-      // dispatch(signup(formData));
+      dispatch(signup(formData));
     }
   };
 
@@ -42,30 +43,31 @@ const Form = ({ isLogin, title, caption, func }) => {
     setFromData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const googleClientId =
-    "692547204413-pu0s0pbil47rnium26j0sc06esjrr4dl.apps.googleusercontent.com";
+  // const googleClientId =
+  //   "692547204413-pu0s0pbil47rnium26j0sc06esjrr4dl.apps.googleusercontent.com";
 
-  const googleSuccess = async (res) => {
-    try {
-      setGoogleError(""); //remove google signup error
-      console.log(res);
-      const data = {
-        email: res.profileObj.email,
-        firstName: res.profileObj.givenName,
-        lastName: res.profileObj.familyName,
-        avatar: res.profileObj.imageUrl,
-        googleTokenId: res.tokenId,
-      };
-      // dispatch(login(data, navigate));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //removed google login for token reasons
 
-  const googleFailure = () => {
-    // set error for google signup
-    setGoogleError("There was an error signing in with google.");
-  };
+  // const googleSuccess = async (res) => {
+  //   try {
+  //     setGoogleError(""); //remove google signup error
+  //     console.log(res);
+  //     const data = {
+  //       email: res.profileObj.email,
+  //       firstName: res.profileObj.givenName,
+  //       lastName: res.profileObj.familyName,
+  //       googleTokenId: res.tokenId,
+  //     };
+  //     dispatch({ type: AUTH });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // const googleFailure = () => {
+  //   // set error for google signup
+  //   setGoogleError("There was an error signing in with google.");
+  // };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -102,7 +104,7 @@ const Form = ({ isLogin, title, caption, func }) => {
             </>
           )}
         </div>
-        {isLogin && (
+        {/* {isLogin && (
           <>
             <GoogleLogin
               clientId={googleClientId}
@@ -113,7 +115,7 @@ const Form = ({ isLogin, title, caption, func }) => {
             />
             <div className="or">Or</div>
           </>
-        )}
+        )} */}
         <form
           action={isLogin ? "login" : "signup"}
           method="post"
@@ -183,7 +185,7 @@ const Form = ({ isLogin, title, caption, func }) => {
             </div>
           </>
         )}
-        {!isLogin && (
+        {/* {!isLogin && (
           <>
             <div className="or">Or</div>
             <GoogleLogin
@@ -194,7 +196,7 @@ const Form = ({ isLogin, title, caption, func }) => {
               cookiePolicy="single_host_origin"
             />
           </>
-        )}
+        )} */}
       </div>
     </div>
   );

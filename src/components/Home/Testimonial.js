@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
+import ReactStars from "react-rating-stars-component";
 
-function Testimonial({ src, text, name }) {
+function Testimonial({ src, text, name, rating }) {
+  const [rating2, setRating] = useState(rating);
+  useEffect(() => {
+    setRating(rating);
+  }, [rating]);
   return (
     <div className="testimonial-item bg-transparent border rounded p-4">
       <i className="fa fa-2x primaryColor">
@@ -16,7 +21,12 @@ function Testimonial({ src, text, name }) {
         />
         <div className="ps-3">
           <h5 className="mb-1">{name}</h5>
-          <small>Profession</small>
+          <ReactStars
+            value={parseFloat(rating2)}
+            count={5}
+            activeColor={"#fea116"}
+            name="rating"
+          />
         </div>
       </div>
     </div>

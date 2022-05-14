@@ -12,11 +12,11 @@ export const getFaqs = () => async (dispatch) => {
     type: FETCH_FAQ_REQUEST,
   });
   try {
-    const res = await axios.get(process.env.REACT_APP_API + "/faq");
+    const res = await axios.get(process.env.REACT_APP_API + "/api/faqs");
     console.log(res.data);
     dispatch({
       type: FETCH_FAQ_SUCCESS,
-      payload: res.data,
+      payload: res.data.FAQs.data,
     });
   } catch (error) {
     console.log(error);

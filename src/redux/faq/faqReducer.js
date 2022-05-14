@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   faqs: [],
-  loading: false,
+  loadingFaqs: false,
 };
 
 export const faqReducer = (state = initialState, action) => {
@@ -17,19 +17,19 @@ export const faqReducer = (state = initialState, action) => {
       return {
         ...state,
         faqs: [],
-        loading: true,
+        loadingFaqs: true,
       };
     case FETCH_FAQ_SUCCESS:
       return {
         ...state,
         faqs: action.payload,
-        loading: false,
+        loadingFaqs: false,
       };
     case FETCH_FAQ_FAIL:
       return {
         ...state,
         faqs: [],
-        loading: false,
+        loadingFaqs: false,
       };
 
     default:

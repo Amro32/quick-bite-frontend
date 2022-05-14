@@ -36,6 +36,8 @@ import MenuItem from "../Menu/MenuItem";
 import { Link } from "react-router-dom";
 import { getFeedbacks } from "../../redux/feedback/feedbackActions";
 import { getMenus } from "../../redux/menu/menuActions";
+import { getTeamMembers } from "../../redux/team/teamActions";
+import Loading from "../AssetComponents/Loading/Loading";
 
 function Home() {
   // Carousel configuration
@@ -59,7 +61,14 @@ function Home() {
   };
 
   // menus data
-  const { menus } = useSelector((state) => state.menuReducer);
+  const { menus, loadingMenus } = useSelector((state) => state.menuReducer);
+  // team members data
+  const { team, loadingTeam } = useSelector((state) => state.teamReducer);
+  //visit feedbacks or testimonials
+  const { feedbacks, loadingTestimonials } = useSelector(
+    (state) => state.feedbackReducer
+  );
+
   // const menus = [
   //   {
   //     id: 1,
@@ -84,8 +93,9 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFeedbacks());
-    dispatch(getMenus());
+    if (feedbacks.length === 0) dispatch(getFeedbacks());
+    if (menus.length === 0) dispatch(getMenus());
+    if (team.length === 0) dispatch(getTeamMembers());
   }, []);
 
   return (
@@ -215,33 +225,37 @@ function Home() {
               })}
             </ul>
             <div className="tab-content">
-              {menus.map((menu, i) => {
-                return (
-                  <div
-                    id={"tab-" + i}
-                    className={`tab-pane fade show p-0 ${
-                      i === 0 ? "active" : ""
-                    }`}
-                    key={i}
-                  >
-                    <div className="row g-4">
-                      {menu?.items?.data?.map((item, j) => {
-                        return (
-                          <MenuItem
-                            src={menu1}
-                            name={item.name}
-                            description={item.details}
-                            price={item.base_price}
-                            currency={"$"}
-                            key={j}
-                            sale={item.sale}
-                          />
-                        );
-                      })}
+              {loadingMenus ? (
+                <Loading />
+              ) : (
+                menus.map((menu, i) => {
+                  return (
+                    <div
+                      id={"tab-" + i}
+                      className={`tab-pane fade show p-0 ${
+                        i === 0 ? "active" : ""
+                      }`}
+                      key={i}
+                    >
+                      <div className="row g-4">
+                        {menu?.items?.data?.map((item, j) => {
+                          return (
+                            <MenuItem
+                              src={menu1}
+                              name={item.name}
+                              description={item.details}
+                              price={item.base_price}
+                              currency={"$"}
+                              key={j}
+                              sale={item.sale}
+                            />
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
@@ -394,12 +408,26 @@ function Home() {
             </h5>
             <h1 className="mb-5">Our Master Chefs</h1>
           </div>
-          <div className="row g-4">
-            <TeamMember name={"Full name"} role={"designation"} src={team1} />
-            <TeamMember name={"Full name"} role={"designation"} src={team2} />
-            <TeamMember name={"Full name"} role={"designation"} src={team3} />
-            <TeamMember name={"Full name"} role={"designation"} src={team4} />
-          </div>
+
+          {loadingTeam ? (
+            <Loading />
+          ) : (
+            <div className="row g-4">
+              {team.map((member, i) => {
+                return (
+                  <TeamMember
+                    name={member.full_name}
+                    role={member.position}
+                    src={team1}
+                    fb={member.fb_link}
+                    twitter={member.twitter_link}
+                    insta={member.ig_link}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
       {/* <!-- Team End --> */}
@@ -413,36 +441,23 @@ function Home() {
             </h5>
             <h1 className="mb-5">Our Clients Say!!!</h1>
           </div>
-          <Carousel responsive={responsive} autoPlay={false}>
-            <Testimonial
-              src={testimonial1}
-              name={"Client Name"}
-              text={
-                "Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam"
-              }
-            />
-            <Testimonial
-              src={testimonial2}
-              name={"Client Name"}
-              text={
-                "Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam"
-              }
-            />
-            <Testimonial
-              src={testimonial3}
-              name={"Client Name"}
-              text={
-                "Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam"
-              }
-            />
-            <Testimonial
-              src={testimonial4}
-              name={"Client Name"}
-              text={
-                "Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam"
-              }
-            />
-          </Carousel>
+          {loadingTestimonials ? (
+            <Loading />
+          ) : (
+            <Carousel responsive={responsive} autoPlay={false}>
+              {feedbacks.map((f, i) => {
+                return (
+                  <Testimonial
+                    src={testimonial1}
+                    name={f.user.first_name + " " + f.user.last_name}
+                    text={f.details}
+                    rating={f.rating}
+                    key={i}
+                  />
+                );
+              })}
+            </Carousel>
+          )}
         </div>
       </div>
       {/* <!-- Testimonial End --> */}

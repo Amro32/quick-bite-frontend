@@ -9,6 +9,7 @@ import AboutPage from "./components/About/AboutPage";
 import Contact from "./components/Contact/Contact";
 import MenuPage from "./components/Menu/MenuPage";
 import Book from "./components/Book/Book";
+import Item from "./components/Item/Item";
 
 function PagesSwitch() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function PagesSwitch() {
         <Route path="/contact" exact element={<Contact />} />
         <Route path="/menu" exact element={<MenuPage />} />
         <Route path="/book" exact element={<Book />} />
+        <Route path="/item/:id" exact element={<Item />} />
       </Routes>
 
       {/* Footer component*/}

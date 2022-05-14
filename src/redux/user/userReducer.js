@@ -11,7 +11,6 @@ import {
 } from "./userTypes";
 
 const initialState = {
-  user: {},
   token: "",
   isAuthenticated: false,
   loading: false,
@@ -34,8 +33,7 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        user: action.payloadData,
-        token: action.payloadToken,
+        token: action.payload,
         isAuthenticated: true,
         error: "",
       };
@@ -44,7 +42,6 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        user: {},
         token: "",
         isAuthenticated: false,
         error: action.payload,
@@ -63,7 +60,7 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error1: "",
-        response: "A message has been sent to your email for verification!",
+        response: "Your account has been registered successfully.",
       };
 
     case SIGNUP_FAIL:
@@ -76,8 +73,6 @@ export const userReducer = (state = initialState, action) => {
     case AUTH:
       return {
         ...state,
-        user: action.data.result,
-        token: action.data.token,
         isAuthenticated: true,
       };
 

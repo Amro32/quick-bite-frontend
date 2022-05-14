@@ -93,7 +93,7 @@ function Footer() {
             <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
             <div
               className="position-relative mx-auto"
-              style={{ maxWidth: "400px;" }}
+              style={{ maxWidth: "400px" }}
             >
               <input
                 className="form-control primaryBorder w-100 py-3 ps-4 pe-5"
