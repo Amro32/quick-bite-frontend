@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
+import Avatar from "@mui/material/Avatar";
 
-function Testimonial({ src, text, name, rating }) {
+function Testimonial({ text, name, rating }) {
   const [rating2, setRating] = useState(rating);
   useEffect(() => {
     setRating(rating);
@@ -14,12 +15,16 @@ function Testimonial({ src, text, name, rating }) {
       </i>
       <p>{text}</p>
       <div className="d-flex align-items-center">
-        <img
+        {/* <img
           className="img-fluid flex-shrink-0 rounded-circle"
           src={src}
           style={{ width: "50px", height: "50px" }}
           alt=""
-        />
+        /> */}
+        <Avatar sx={{ bgcolor: "var(--primary)", color: "white" }}>
+          {name.split(" ")[0][0]}
+          {name.split(" ")[1][0]}
+        </Avatar>
         <div className="ps-3">
           <h5 className="mb-1">{name}</h5>
           <ReactStars
