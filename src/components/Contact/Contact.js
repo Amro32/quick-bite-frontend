@@ -1,6 +1,7 @@
 import React from "react";
 import BreadCrumb from "../AssetComponents/BreadCrumb/BreadCrumb";
 import { FaEnvelopeOpen } from "react-icons/fa";
+import Title from "../AssetComponents/Title/Title";
 
 function Contact() {
   return (
@@ -8,12 +9,7 @@ function Contact() {
       <BreadCrumb title={"Contact Us"} pageName={"Contact"} />
       <div className="container-xxl py-5">
         <div className="container">
-          <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 className="section-title ff-secondary text-center primaryColor fw-normal">
-              Contact Us
-            </h5>
-            <h1 className="mb-5">Contact For Any Query</h1>
-          </div>
+          <Title title="Contact Us" subtitle={"Contact For Any Query"} />
           <div className="row g-4">
             <div className="col-12">
               <div className="row gy-4">

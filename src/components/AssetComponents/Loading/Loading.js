@@ -4,7 +4,7 @@ import "./Loading.scss";
 function Loading() {
   return (
     <div className="loadingContainer">
-      <div class="lds-dual-ring"></div>
+      <div className="lds-dual-ring"></div>
     </div>
   );
 }

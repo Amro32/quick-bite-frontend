@@ -1,39 +1,30 @@
 import React, { useEffect } from "react";
 import menu1 from "../../assets/menu-1.jpg";
-import menu2 from "../../assets/menu-2.jpg";
-import menu3 from "../../assets/menu-3.jpg";
-import menu4 from "../../assets/menu-4.jpg";
-import menu5 from "../../assets/menu-5.jpg";
-import menu6 from "../../assets/menu-6.jpg";
-import menu7 from "../../assets/menu-7.jpg";
-import menu8 from "../../assets/menu-8.jpg";
-import { FaUtensils, FaHamburger, FaCoffee } from "react-icons/fa";
 import MenuItem from "./MenuItem";
 import MenuTitle from "./MenuTitle";
 import BreadCrumb from "../AssetComponents/BreadCrumb/BreadCrumb";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../AssetComponents/Loading/Loading";
 import { getMenus } from "../../redux/menu/menuActions";
+import Title from "../AssetComponents/Title/Title";
 
 function MenuPage() {
   const dispatch = useDispatch();
   const { loadingMenus, menus } = useSelector((state) => state.menuReducer);
+  const { currency, currencyRate } = useSelector(
+    (state) => state.currencyReducer
+  );
 
   useEffect(() => {
-    dispatch(getMenus());
-  }, []);
+    if (menus.length === 0) dispatch(getMenus());
+  }, [dispatch]);
 
   return (
     <div>
       <BreadCrumb title={"Food Menu"} pageName={"Menu"} />
       <div className="container-xxl py-5">
         <div className="container">
-          <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 className="section-title ff-secondary text-center primaryColor fw-normal">
-              Food Menu
-            </h5>
-            <h1 className="mb-5">Most Popular Items</h1>
-          </div>
+          <Title title="Food Menu" subtitle="Most Popular Items" />
           {loadingMenus ? (
             <Loading />
           ) : (
@@ -73,9 +64,11 @@ function MenuPage() {
                               name={item.name}
                               description={item.details}
                               price={item.base_price}
-                              currency={"$"}
+                              currency={currency}
+                              currencyRate={currencyRate}
                               key={j}
                               sale={item.sale}
+                              id={item.id}
                             />
                           );
                         })}

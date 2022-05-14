@@ -18,6 +18,7 @@ function Testimonial({ src, text, name, rating }) {
           className="img-fluid flex-shrink-0 rounded-circle"
           src={src}
           style={{ width: "50px", height: "50px" }}
+          alt=""
         />
         <div className="ps-3">
           <h5 className="mb-1">{name}</h5>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Faq.scss";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 
 function Faq({ q, a }) {

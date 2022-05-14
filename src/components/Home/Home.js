@@ -4,30 +4,11 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import hero from "../../assets/hero.png";
 import menu1 from "../../assets/menu-1.jpg";
-import menu2 from "../../assets/menu-2.jpg";
-import menu3 from "../../assets/menu-3.jpg";
-import menu4 from "../../assets/menu-4.jpg";
-import menu5 from "../../assets/menu-5.jpg";
-import menu6 from "../../assets/menu-6.jpg";
-import menu7 from "../../assets/menu-7.jpg";
-import menu8 from "../../assets/menu-8.jpg";
 import team1 from "../../assets/team-1.jpg";
-import team2 from "../../assets/team-2.jpg";
-import team3 from "../../assets/team-3.jpg";
-import team4 from "../../assets/team-4.jpg";
+import video from "../../assets/video.jpg";
 import testimonial1 from "../../assets/testimonial-1.jpg";
-import testimonial2 from "../../assets/testimonial-2.jpg";
-import testimonial3 from "../../assets/testimonial-3.jpg";
-import testimonial4 from "../../assets/testimonial-4.jpg";
 
-import {
-  FaUserTie,
-  FaUtensils,
-  FaCartPlus,
-  FaHeadset,
-  FaHamburger,
-  FaCoffee,
-} from "react-icons/fa";
+import { FaUserTie, FaUtensils, FaCartPlus, FaHeadset } from "react-icons/fa";
 import Testimonial from "./Testimonial";
 import About from "../About/About";
 import TeamMember from "../Team/TeamMember";
@@ -38,6 +19,9 @@ import { getFeedbacks } from "../../redux/feedback/feedbackActions";
 import { getMenus } from "../../redux/menu/menuActions";
 import { getTeamMembers } from "../../redux/team/teamActions";
 import Loading from "../AssetComponents/Loading/Loading";
+import Title from "../AssetComponents/Title/Title";
+import { getCurrencies } from "../../redux/currency/currencyActions";
+import { SET_CURRENCY } from "../../redux/currency/currencyTypes";
 
 function Home() {
   // Carousel configuration
@@ -68,34 +52,29 @@ function Home() {
   const { feedbacks, loadingTestimonials } = useSelector(
     (state) => state.feedbackReducer
   );
-
-  // const menus = [
-  //   {
-  //     id: 1,
-  //     type: "Popular",
-  //     name: "Breakfast",
-  //     icon: FaCoffee,
-  //   },
-  //   {
-  //     id: 2,
-  //     type: "Special",
-  //     name: "Launch",
-  //     icon: FaHamburger,
-  //   },
-  //   {
-  //     id: 3,
-  //     type: "Lovely",
-  //     name: "Dinner",
-  //     icon: FaUtensils,
-  //   },
-  // ];
+  //currencies
+  const { currencies, loadingCurrencies, currency, currencyRate } = useSelector(
+    (state) => state.currencyReducer
+  );
 
   const dispatch = useDispatch();
+
+  const handleCurrencyChange = (e) => {
+    let newCurrency = JSON.parse(e.target.value);
+    dispatch({
+      type: SET_CURRENCY,
+      payload: {
+        currency: newCurrency.symbol,
+        currencyRate: parseFloat(newCurrency.rate),
+      },
+    });
+  };
 
   useEffect(() => {
     if (feedbacks.length === 0) dispatch(getFeedbacks());
     if (menus.length === 0) dispatch(getMenus());
     if (team.length === 0) dispatch(getTeamMembers());
+    if (currencies.length === 0) dispatch(getCurrencies());
   }, []);
 
   return (
@@ -201,12 +180,7 @@ function Home() {
       {/* <!-- Menu Start --> */}
       <div className="container-xxl py-5">
         <div className="container">
-          <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 className="section-title ff-secondary text-center primaryColor fw-normal">
-              Food Menu
-            </h5>
-            <h1 className="mb-5">Most Popular Items</h1>
-          </div>
+          <Title title={"Food Menu"} subtitle={"Most Popular Items"} />
           <div
             className="tab-class text-center wow fadeInUp"
             data-wow-delay="0.1s"
@@ -245,9 +219,11 @@ function Home() {
                               name={item.name}
                               description={item.details}
                               price={item.base_price}
-                              currency={"$"}
+                              currency={currency}
+                              currencyRate={currencyRate}
                               key={j}
                               sale={item.sale}
+                              id={item.id}
                             />
                           );
                         })}
@@ -256,6 +232,25 @@ function Home() {
                   );
                 })
               )}
+            </div>
+            {/* Currencies */}
+            <div className="d-flex justify-content-end currencyRow">
+              <select
+                className="primaryBtn btn"
+                defaultValue=""
+                onChange={handleCurrencyChange}
+              >
+                <option disabled value="">
+                  Change Currency
+                </option>
+                {currencies.map((curr, i) => {
+                  return (
+                    <option value={JSON.stringify(curr)} key={i}>
+                      {curr.name} ({curr.symbol})
+                    </option>
+                  );
+                })}
+              </select>
             </div>
           </div>
         </div>
@@ -386,11 +381,12 @@ function Home() {
               <div className="ratio ratio-16x9">
                 <iframe
                   className="embed-responsive-item"
-                  src=""
+                  src={video}
                   id="video"
                   allowFullScreen
                   allowscriptaccess="always"
                   allow="autoplay"
+                  title="book"
                 ></iframe>
               </div>
             </div>
@@ -402,12 +398,7 @@ function Home() {
       {/* <!-- Team Start --> */}
       <div className="container-xxl pt-5 pb-3">
         <div className="container">
-          <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 className="section-title ff-secondary text-center primaryColor fw-normal">
-              Team Members
-            </h5>
-            <h1 className="mb-5">Our Master Chefs</h1>
-          </div>
+          <Title title="Team Members" subtitle={"Our Master Chefs"} />
 
           {loadingTeam ? (
             <Loading />
@@ -435,12 +426,7 @@ function Home() {
       {/* <!-- Testimonial Start --> */}
       <div className="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div className="container">
-          <div className="text-center">
-            <h5 className="section-title ff-secondary text-center primaryColor fw-normal">
-              Testimonial
-            </h5>
-            <h1 className="mb-5">Our Clients Say!!!</h1>
-          </div>
+          <Title title="Testimonials" subtitle={"What Our Clients Say!"} />
           {loadingTestimonials ? (
             <Loading />
           ) : (

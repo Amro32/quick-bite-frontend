@@ -238,8 +238,8 @@
   position: relative;
   height: 100%;
   min-height: 500px;
-  //   background: linear-gradient(rgba(15, 23, 43, 0.1), rgba(15, 23, 43, 0.1)),
-  //     url(../img/video.jpg);
+  background: linear-gradient(rgba(15, 23, 43, 0.1), rgba(15, 23, 43, 0.1)),
+    url(assets/video.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -475,4 +475,81 @@
   margin-right: 0;
   padding-right: 0;
   border-right: none;
+}
+
+.itemDiv {
+  cursor: pointer;
+}
+
+.faq_question {
+  font-size: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 2rem auto;
+}
+
+.faq_title_ {
+  text-align: center;
+  font-weight: bold;
+  margin: 14rem 0 3.75rem 0 !important;
+}
+
+.faq_answer {
+  width: 70%;
+  margin: 0.5rem 0;
+}
+
+.itemImages {
+  margin: 2.5rem 3.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.itemImage {
+  width: 35rem;
+  margin-bottom: 2rem;
+}
+
+.itemDescription {
+  margin: 3.75rem;
+
+  .row {
+    width: 50%;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+
+    .col:first-of-type {
+      color: var(--dark);
+      font-weight: bold;
+    }
+  }
+}
+
+.currencyRow {
+  margin-top: 3.75rem;
+}
+
+@media only screen and (max-width: 1008px) {
+  .faq {
+    width: 70%;
+  }
+  .faq_title_ {
+    margin: 0rem 0 3.75rem 0 !important;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .itemImage {
+    min-width: 20rem;
+    min-height: 20rem;
+  }
 }

@@ -6,6 +6,7 @@ import { feedbackReducer } from "./feedback/feedbackReducer";
 import { faqReducer } from "./faq/faqReducer";
 import { menuReducer } from "./menu/menuReducer";
 import { teamReducer } from "./team/teamReducer";
+import { currencyReducer } from "./currency/currencyReducer";
 
 const reducer = combineReducers({
   userReducer: userReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   faqReducer: faqReducer,
   menuReducer: menuReducer,
   teamReducer: teamReducer,
+  currencyReducer: currencyReducer,
 });
 
 const middleware = [thunk];
