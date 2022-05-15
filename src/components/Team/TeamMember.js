@@ -1,15 +1,31 @@
-import React from "react";
-import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaFacebookF, FaTwitter, FaInstagram, FaTrash } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import DeleteModal from "../Modals/DeleteModal";
+import { deleteTeam } from "../../redux/team/teamActions";
 
-function TeamMember({ name, role, src, fb, twitter, insta }) {
+function TeamMember({ name, role1, src, fb, twitter, insta, id }) {
+  const { isAuthenticated, role } = useSelector((state) => state.userReducer);
+
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
+  const handleDeleteOpen = () => setDeleteOpen(true);
+  const handleDeleteClose = () => setDeleteOpen(false);
+
   return (
     <div className="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+      <DeleteModal
+        id={id}
+        handleDeleteClose={handleDeleteClose}
+        showDelete={deleteOpen}
+        action={deleteTeam}
+      />
       <div className="team-item text-center rounded overflow-hidden">
         <div className="rounded-circle overflow-hidden m-4">
           <img className="img-fluid" src={src} alt="" />
         </div>
         <h5 className="mb-0">{name}</h5>
-        <small>{role}</small>
+        <small>{role1}</small>
         <div className="d-flex justify-content-center mt-3">
           <a
             className="btn btn-square primaryBtn mx-1"
@@ -36,6 +52,11 @@ function TeamMember({ name, role, src, fb, twitter, insta }) {
               <FaInstagram />
             </i>
           </a>
+          {isAuthenticated && role !== "client" && (
+            <div>
+              <FaTrash size={30} onClick={handleDeleteOpen} />
+            </div>
+          )}
         </div>
       </div>
     </div>

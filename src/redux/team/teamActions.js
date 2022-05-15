@@ -28,3 +28,15 @@ export const getTeamMembers = () => async (dispatch) => {
     });
   }
 };
+
+export const deleteTeam = (id) => async (dispatch) => {
+  try {
+    const response = await axios.delete(
+      process.env.REACT_APP_API + "/api/employees/" + id
+    );
+    console.log(response.data);
+    dispatch(getTeamMembers());
+  } catch (e) {
+    console.log(e);
+  }
+};

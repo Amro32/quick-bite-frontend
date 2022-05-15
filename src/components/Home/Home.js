@@ -329,11 +329,12 @@ function Home() {
                 return (
                   <TeamMember
                     name={member.full_name}
-                    role={member.position}
+                    role1={member.position}
                     src={team1}
                     fb={member.fb_link}
                     twitter={member.twitter_link}
                     insta={member.ig_link}
+                    id={member.id}
                     key={i}
                   />
                 );
