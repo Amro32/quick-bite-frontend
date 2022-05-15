@@ -8,11 +8,13 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
   AUTH,
+  SET_ROLE,
 } from "./userTypes";
 
 const initialState = {
   token: "",
   isAuthenticated: false,
+  role: "",
   loading: false,
   error: "",
   error1: "",
@@ -74,6 +76,12 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
+      };
+
+    case SET_ROLE:
+      return {
+        ...state,
+        role: action.payload,
       };
 
     case LOGOUT:

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import hero from "../../assets/hero.png";
-import menu1 from "../../assets/menu-1.jpg";
 import team1 from "../../assets/team-1.jpg";
 import video from "../../assets/video.jpg";
 import testimonial1 from "../../assets/testimonial-1.jpg";
@@ -12,8 +11,6 @@ import { FaUserTie, FaUtensils, FaCartPlus, FaHeadset } from "react-icons/fa";
 import Testimonial from "./Testimonial";
 import About from "../About/About";
 import TeamMember from "../Team/TeamMember";
-import MenuTitle from "../Menu/MenuTitle";
-import MenuItem from "../Menu/MenuItem";
 import { Link } from "react-router-dom";
 import { getFeedbacks } from "../../redux/feedback/feedbackActions";
 import { getMenus } from "../../redux/menu/menuActions";
@@ -21,7 +18,7 @@ import { getTeamMembers } from "../../redux/team/teamActions";
 import Loading from "../AssetComponents/Loading/Loading";
 import Title from "../AssetComponents/Title/Title";
 import { getCurrencies } from "../../redux/currency/currencyActions";
-import { SET_CURRENCY } from "../../redux/currency/currencyTypes";
+import Menu from "../Menu/Menu";
 
 function Home() {
   // Carousel configuration
@@ -58,17 +55,6 @@ function Home() {
   );
 
   const dispatch = useDispatch();
-
-  const handleCurrencyChange = (e) => {
-    let newCurrency = JSON.parse(e.target.value);
-    dispatch({
-      type: SET_CURRENCY,
-      payload: {
-        currency: newCurrency.symbol,
-        currencyRate: parseFloat(newCurrency.rate),
-      },
-    });
-  };
 
   useEffect(() => {
     if (feedbacks.length === 0) dispatch(getFeedbacks());
@@ -181,78 +167,13 @@ function Home() {
       <div className="container-xxl py-5">
         <div className="container">
           <Title title={"Food Menu"} subtitle={"Most Popular Items"} />
-          <div
-            className="tab-class text-center wow fadeInUp"
-            data-wow-delay="0.1s"
-          >
-            <ul className="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
-              {menus.map((menu, i) => {
-                return (
-                  <MenuTitle
-                    href={"#tab-" + i}
-                    title={menu.type}
-                    subtitle={menu.name}
-                    active={i === 0 ? "active" : null}
-                    key={i}
-                  />
-                );
-              })}
-            </ul>
-            <div className="tab-content">
-              {loadingMenus ? (
-                <Loading />
-              ) : (
-                menus.map((menu, i) => {
-                  return (
-                    <div
-                      id={"tab-" + i}
-                      className={`tab-pane fade show p-0 ${
-                        i === 0 ? "active" : ""
-                      }`}
-                      key={i}
-                    >
-                      <div className="row g-4">
-                        {menu?.items?.data?.map((item, j) => {
-                          return (
-                            <MenuItem
-                              src={menu1}
-                              name={item.name}
-                              description={item.details}
-                              price={item.base_price}
-                              currency={currency}
-                              currencyRate={currencyRate}
-                              key={j}
-                              sale={item.sale}
-                              id={item.id}
-                            />
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })
-              )}
-            </div>
-            {/* Currencies */}
-            <div className="d-flex justify-content-end currencyRow">
-              <select
-                className="primaryBtn btn"
-                defaultValue=""
-                onChange={handleCurrencyChange}
-              >
-                <option disabled value="">
-                  Change Currency
-                </option>
-                {currencies.map((curr, i) => {
-                  return (
-                    <option value={JSON.stringify(curr)} key={i}>
-                      {curr.name} ({curr.symbol})
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
+          <Menu
+            menus={menus}
+            loadingMenus={loadingMenus}
+            currency={currency}
+            currencyRate={currencyRate}
+            currencies={currencies}
+          />
         </div>
       </div>
       {/* <!-- Menu End --> */}

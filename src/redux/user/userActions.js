@@ -6,6 +6,7 @@ import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
+  SET_ROLE,
 } from "./userTypes";
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
@@ -23,7 +24,9 @@ export const login = (data) => async (dispatch) => {
 
     console.log(res.data); //* to be removed
     localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
     dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
+    dispatch({ type: SET_ROLE, payload: res.data.user?.role });
   } catch (error) {
     console.log(
       error.response && error.response.data && error.response.data.message
@@ -36,6 +39,7 @@ export const login = (data) => async (dispatch) => {
   }
 };
 
+//todo: login after signing up
 export const signup =
   ({ firstName, lastName, email, password }) =>
   async (dispatch) => {

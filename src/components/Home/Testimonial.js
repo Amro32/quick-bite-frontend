@@ -32,6 +32,7 @@ function Testimonial({ text, name, rating }) {
             count={5}
             activeColor={"#fea116"}
             name="rating"
+            edit={false}
           />
         </div>
       </div>
