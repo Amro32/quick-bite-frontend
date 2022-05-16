@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Header() {
-  const { isAuthenticated } = useSelector((state) => state.userReducer);
+  const { isAuthenticated, role } = useSelector((state) => state.userReducer);
   return (
     <div className="container-xxl position-relative p-0">
       <nav className="navbar navbar-expand-lg navbar-dark px-4 px-lg-5 py-3 py-lg-0 customNav">
@@ -41,14 +41,26 @@ function Header() {
             <Link to="/contact" className="nav-item nav-link">
               Contact
             </Link>
+            {isAuthenticated && role === "super admin" && (
+              <Link to="/admin" className="nav-item nav-link">
+                Admin
+              </Link>
+            )}
           </div>
+
           {!isAuthenticated ? (
             <Link to="/login" className="btn btn-primary primaryBtn py-2 px-4">
               Login
             </Link>
           ) : (
-            <button className="btn btn-primary primaryBtn py-2 px-4">
-              Welcome!
+            <button
+              className="btn btn-primary primaryBtn py-2 px-4"
+              onClick={() => {
+                localStorage.clear();
+                window.location.href = "/login";
+              }}
+            >
+              Logout
             </button>
           )}
         </div>

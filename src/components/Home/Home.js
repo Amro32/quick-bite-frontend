@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import hero from "../../assets/hero.png";
-import team1 from "../../assets/team-1.jpg";
 import video from "../../assets/video.jpg";
 import testimonial1 from "../../assets/testimonial-1.jpg";
-
 import { FaUserTie, FaUtensils, FaCartPlus, FaHeadset } from "react-icons/fa";
 import Testimonial from "./Testimonial";
 import About from "../About/About";
@@ -19,6 +17,8 @@ import Loading from "../AssetComponents/Loading/Loading";
 import Title from "../AssetComponents/Title/Title";
 import { getCurrencies } from "../../redux/currency/currencyActions";
 import Menu from "../Menu/Menu";
+import AddTeamMember from "../Team/AddTeamMember";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   // Carousel configuration
@@ -53,8 +53,11 @@ function Home() {
   const { currencies, loadingCurrencies, currency, currencyRate } = useSelector(
     (state) => state.currencyReducer
   );
+  //authentication
+  const { isAuthenticated, role } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (feedbacks.length === 0) dispatch(getFeedbacks());
@@ -205,68 +208,12 @@ function Home() {
               <h1 className="text-white mb-4">Book A Table Online</h1>
               <form>
                 <div className="row g-3">
-                  <div className="col-md-6">
-                    <div className="form-floating">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        placeholder="Your Name"
-                      />
-                      <label htmlFor="name">Your Name</label>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-floating">
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        placeholder="Your Email"
-                      />
-                      <label htmlFor="email">Your Email</label>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div
-                      className="form-floating date"
-                      id="date3"
-                      data-target-input="nearest"
+                  <div className="col-12">
+                    <button
+                      className="btn primaryBtn w-100 py-3"
+                      type="button"
+                      onClick={() => navigate("/book")}
                     >
-                      <input
-                        type="text"
-                        className="form-control datetimepicker-input"
-                        id="datetime"
-                        placeholder="Date &#38; Time"
-                        data-target="#date3"
-                        data-toggle="datetimepicker"
-                      />
-                      <label htmlFor="datetime">Date &#38; Time</label>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-floating">
-                      <select className="form-select" id="select1">
-                        <option value="1">People 1</option>
-                        <option value="2">People 2</option>
-                        <option value="3">People 3</option>
-                      </select>
-                      <label htmlFor="select1">No Of People</label>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-floating">
-                      <textarea
-                        className="form-control"
-                        placeholder="Special Request"
-                        id="message"
-                        style={{ height: "100px" }}
-                      ></textarea>
-                      <label htmlFor="message">Special Request</label>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <button className="btn primaryBtn w-100 py-3" type="submit">
                       Book Now
                     </button>
                   </div>
@@ -330,7 +277,11 @@ function Home() {
                   <TeamMember
                     name={member.full_name}
                     role1={member.position}
-                    src={team1}
+                    src={
+                      process.env.REACT_APP_API +
+                      "/storage/images/employees/" +
+                      member.image
+                    }
                     fb={member.fb_link}
                     twitter={member.twitter_link}
                     insta={member.ig_link}
@@ -339,6 +290,7 @@ function Home() {
                   />
                 );
               })}
+              {isAuthenticated && role !== "client" && <AddTeamMember />}
             </div>
           )}
         </div>

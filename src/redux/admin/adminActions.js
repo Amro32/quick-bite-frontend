@@ -1,27 +1,25 @@
-/** @format */
-
 import {
-  FETCH_FAQ_REQUEST,
-  FETCH_FAQ_SUCCESS,
-  FETCH_FAQ_FAIL,
-} from "./faqTypes";
+  FETCH_ADMINS_REQUEST,
+  FETCH_ADMINS_SUCCESS,
+  FETCH_ADMINS_FAIL,
+} from "./adminTypes";
 import axios from "axios";
 
-export const getFaqs = () => async (dispatch) => {
+export const getAdmins = () => async (dispatch) => {
   dispatch({
-    type: FETCH_FAQ_REQUEST,
+    type: FETCH_ADMINS_REQUEST,
   });
   try {
     const res = await axios.get(process.env.REACT_APP_API + "/api/faqs");
     console.log(res.data);
     dispatch({
-      type: FETCH_FAQ_SUCCESS,
+      type: FETCH_ADMINS_SUCCESS,
       payload: res.data.FAQs.data,
     });
   } catch (error) {
     console.log(error);
     dispatch({
-      type: FETCH_FAQ_FAIL,
+      type: FETCH_ADMINS_FAIL,
     });
   }
 };

@@ -40,3 +40,21 @@ export const deleteTeam = (id) => async (dispatch) => {
     console.log(e);
   }
 };
+
+export const addMember = (data) => async (dispatch) => {
+  try {
+    let body = new FormData();
+    body.append("full_name", data.full_name);
+    body.append("position", data.position);
+    body.append("image", data.image);
+    console.log(body);
+    const response = await axios.post(
+      process.env.REACT_APP_API + "/api/employees/",
+      body
+    );
+    console.log(response.data);
+    dispatch(getTeamMembers());
+  } catch (e) {
+    console.log(e);
+  }
+};

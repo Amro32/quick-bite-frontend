@@ -27,6 +27,7 @@ export const login = (data) => async (dispatch) => {
     localStorage.setItem("user", JSON.stringify(res.data.user));
     dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
     dispatch({ type: SET_ROLE, payload: res.data.user?.role });
+    window.location.href = "/";
   } catch (error) {
     console.log(
       error.response && error.response.data && error.response.data.message

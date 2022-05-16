@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { addReservation } from "../../redux/reservation/reservationActions";
 import BreadCrumb from "../AssetComponents/BreadCrumb/BreadCrumb";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../AssetComponents/Loading/Loading";
 
 function Book() {
+  const [data, setData] = useState({});
+
+  const { loadingReservation, reservation, error } = useSelector(
+    (state) => state.reservationReducer
+  );
+
+  const dispatch = useDispatch();
+
+  const handle = (e) => {
+    e.preventDefault();
+    dispatch(addReservation(data));
+  };
+
   return (
     <div>
       <BreadCrumb title={"Booking"} pageName={"Booking"} />
@@ -29,75 +45,75 @@ function Book() {
                 Reservation
               </h5>
               <h1 className="text-white mb-4">Book A Table Online</h1>
-              <form>
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <div className="form-floating">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        placeholder="Your Name"
-                      />
-                      <label htmlFor="name">Your Name</label>
+              {loadingReservation ? (
+                <Loading />
+              ) : (
+                <form onSubmit={handle}>
+                  <div
+                    className="row g-3 mb-3"
+                    style={{ color: "var(--primary)" }}
+                  >
+                    {error}
+                    {reservation}
+                  </div>
+                  <div className="row g-3">
+                    <div className="col-md-6">
+                      <div
+                        className="form-floating date"
+                        id="date3"
+                        data-target-input="nearest"
+                      >
+                        <input
+                          type="datetime-local"
+                          className="form-control datetimepicker-input"
+                          id="datetime"
+                          placeholder="Date &#38; Time"
+                          required
+                          onChange={(e) =>
+                            setData({ ...data, date: e.target.value })
+                          }
+                        />
+                        <label htmlFor="datetime">Date &#38; Time</label>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-floating">
+                        <input
+                          type="number"
+                          className="form-control"
+                          required
+                          onChange={(e) =>
+                            setData({
+                              ...data,
+                              number_of_people: e.target.value,
+                            })
+                          }
+                        />
+                        <label htmlFor="select1">No Of People</label>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="form-floating">
+                        <textarea
+                          className="form-control"
+                          placeholder="Special Request"
+                          id="message"
+                          style={{ height: "100px" }}
+                        ></textarea>
+                        <label htmlFor="message">Special Request</label>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <button
+                        className="btn primaryBtn w-100 py-3"
+                        type="submit"
+                      >
+                        Book Now
+                      </button>
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="form-floating">
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        placeholder="Your Email"
-                      />
-                      <label htmlFor="email">Your Email</label>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div
-                      className="form-floating date"
-                      id="date3"
-                      data-target-input="nearest"
-                    >
-                      <input
-                        type="text"
-                        className="form-control datetimepicker-input"
-                        id="datetime"
-                        placeholder="Date &#38; Time"
-                        data-target="#date3"
-                        data-toggle="datetimepicker"
-                      />
-                      <label htmlFor="datetime">Date &#38; Time</label>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-floating">
-                      <select className="form-select" id="select1">
-                        <option value="1">People 1</option>
-                        <option value="2">People 2</option>
-                        <option value="3">People 3</option>
-                      </select>
-                      <label htmlFor="select1">No Of People</label>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-floating">
-                      <textarea
-                        className="form-control"
-                        placeholder="Special Request"
-                        id="message"
-                        style={{ height: "100px" }}
-                      ></textarea>
-                      <label htmlFor="message">Special Request</label>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <button className="btn primaryBtn w-100 py-3" type="submit">
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </form>
+                </form>
+              )}
             </div>
           </div>
         </div>
