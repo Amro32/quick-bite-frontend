@@ -8,6 +8,7 @@ import { menuReducer } from "./menu/menuReducer";
 import { teamReducer } from "./team/teamReducer";
 import { currencyReducer } from "./currency/currencyReducer";
 import { reservationReducer } from "./reservation/reservationReducer";
+import { adminReducer } from "./admin/adminReducer";
 
 const reducer = combineReducers({
   userReducer: userReducer,
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   teamReducer: teamReducer,
   currencyReducer: currencyReducer,
   reservationReducer: reservationReducer,
+  adminReducer: adminReducer,
 });
 
 const middleware = [thunk];
