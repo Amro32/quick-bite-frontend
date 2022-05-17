@@ -1,9 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import BreadCrumb from "../AssetComponents/BreadCrumb/BreadCrumb";
 import { FaEnvelopeOpen } from "react-icons/fa";
 import Title from "../AssetComponents/Title/Title";
+import emailjs from "emailjs-com";
 
 function Contact() {
+
+  const [data, setData] = useState({});
+  const [sent, setSent] = useState(false);
+
+  const handle = (e) => {
+    e.preventDefault();
+    const params = {
+      from_name: data.name,
+      to_name: "QuickBiteAdmin",
+      from_email: data.email,
+      message: data.message,
+      subject: data.subject
+    };
+    emailjs.send(
+      "service_84k6v8n",
+      "template_ypr4voa",
+      params,
+      "user_3ljxo8synD4VPPWFQbcWs"
+    );
+    setSent(true);
+  };
+
   return (
     <div className="contact">
       <BreadCrumb title={"Contact Us"} pageName={"Contact"} />
@@ -61,61 +84,70 @@ function Contact() {
             </div>
             <div className="col-md-6">
               <div className="wow fadeInUp" data-wow-delay="0.2s">
-                <form>
-                  <div className="row g-3">
-                    <div className="col-md-6">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="name"
-                          placeholder="Your Name"
-                        />
-                        <label for="name">Your Name</label>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-floating">
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="email"
-                          placeholder="Your Email"
-                        />
-                        <label for="email">Your Email</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="subject"
-                          placeholder="Subject"
-                        />
-                        <label for="subject">Subject</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <textarea
-                          className="form-control"
-                          placeholder="Leave a message here"
-                          id="message"
-                          style={{ height: "150px" }}
-                        ></textarea>
-                        <label for="message">Message</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <button
-                        className="btn primaryBtn w-100 py-3"
-                        type="submit"
-                      >
-                        Send Message
-                      </button>
-                    </div>
-                  </div>
+                <form onSubmit={handle}>
+                  {sent ? (
+                    <div>Your message has been sent. Thank you!</div>
+                  ) : (
+                    <>
+                      <div className="row g-3">
+                        <div className="col-md-6">
+                          <div className="form-floating">
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="name"
+                              placeholder="Your Name"
+                                onChange={(e) => setData({...data, name: e.target.value})}
+                              />
+                              <label for="name">Your Name</label>
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <div className="form-floating">
+                              <input
+                                type="email"
+                                className="form-control"
+                                id="email"
+                                placeholder="Your Email"
+                                onChange={(e) => setData({...data, email: e.target.value})}
+                              />
+                              <label for="email">Your Email</label>
+                            </div>
+                          </div>
+                          <div className="col-12">
+                            <div className="form-floating">
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="subject"
+                                placeholder="Subject"
+                                onChange={(e) => setData({...data, subject: e.target.value})}
+                              />
+                              <label for="subject">Subject</label>
+                            </div>
+                          </div>
+                          <div className="col-12">
+                            <div className="form-floating">
+                              <textarea
+                                className="form-control"
+                                placeholder="Leave a message here"
+                                id="message"
+                                style={{height: "150px"}}
+                                onChange={(e) => setData({...data, message: e.target.value})}
+                              ></textarea>
+                              <label for="message">Message</label>
+                            </div>
+                          </div>
+                          <div className="col-12">
+                            <button
+                              className="btn primaryBtn w-100 py-3"
+                              type="submit"
+                            >
+                              Send Message
+                            </button>
+                          </div>
+                        </div>
+                    </>)}
                 </form>
               </div>
             </div>

@@ -11,6 +11,8 @@ import MenuPage from "./components/Menu/MenuPage";
 import Book from "./components/Book/Book";
 import Item from "./components/Item/Item";
 import Admin from "./components/Admin/Admin";
+import Terms from "./components/Terms/Terms";
+import Privacy from "./components/Privacy/Privacy";
 
 function PagesSwitch() {
   const location = useLocation();
@@ -33,7 +35,9 @@ function PagesSwitch() {
         <Route path="/menu" exact element={<MenuPage />} />
         <Route path="/book" exact element={<Book />} />
         <Route path="/admin" exact element={<Admin />} />
-        <Route path="/item/:id" exact element={<Item />} />
+              <Route path="/item/:id" exact element={<Item />} />
+              <Route path="/terms" exact element={<Terms />} />
+              <Route path="/privacy" exact element={<Privacy />} />
       </Routes>
 
       {/* Footer component*/}

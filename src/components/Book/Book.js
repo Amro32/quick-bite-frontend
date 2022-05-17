@@ -28,15 +28,7 @@ function Book() {
         <div className="row g-0">
           <div className="col-md-6">
             <div className="video">
-              <button
-                type="button"
-                className="btn-play"
-                data-bs-toggle="modal"
-                data-src="https://www.youtube.com/embed/DWRcNpR6Kdc"
-                data-bs-target="#videoModal"
-              >
-                <span></span>
-              </button>
+
             </div>
           </div>
           <div className="col-md-6 bg-dark d-flex align-items-center">

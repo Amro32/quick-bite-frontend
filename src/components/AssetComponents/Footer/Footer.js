@@ -9,6 +9,7 @@ import {
   FaYoutube,
   FaLinkedinIn,
 } from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 function Footer() {
   return (
@@ -18,66 +19,65 @@ function Footer() {
     >
       <div className="container py-5">
         <div className="row g-5">
-          <div className="col-lg-3 col-md-6">
+                  <div className="col-lg-4 col-md-6">
             <h4 className="section-title ff-secondary text-start primaryColor fw-normal mb-4">
               Company
             </h4>
-            <a className="btn btn-link" href="">
-              About Us
-            </a>
-            <a className="btn btn-link" href="">
-              Contact Us
-            </a>
-            <a className="btn btn-link" href="">
-              Reservation
-            </a>
-            <a className="btn btn-link" href="">
+                      <Link to="/about" className="btn btn-link">
+                          About Us
+                      </Link>
+                      <Link to="/contact" className="btn btn-link">
+                          Contact Us
+                      </Link>
+                      <Link to="/book" className="btn btn-link">
+                          Reservation
+                      </Link>
+                      <Link to="/privacy" className="btn btn-link">
               Privacy Policy
-            </a>
-            <a className="btn btn-link" href="">
-              Terms &#38; Condition
-            </a>
+                      </Link>
+                      <Link to="/terms" className="btn btn-link">
+                          Terms &#38; Condition
+                      </Link>
           </div>
-          <div className="col-lg-3 col-md-6">
+                  <div className="col-lg-4 col-md-6">
             <h4 className="section-title ff-secondary text-start primaryColor fw-normal mb-4">
               Contact
             </h4>
             <p className="d-flex align-items-center mb-2">
               <FaMapMarkerAlt className="me-3" />
-              123 Street, New York, USA
+                          City Center, Beirut, Lebanon
             </p>
             <p className="d-flex align-items-center mb-2">
               <FaPhoneAlt className="me-3" />
-              +012 345 67890
-            </p>
+                          +961 12 345 678            </p>
             <p className="d-flex align-items-center mb-2">
               <FaEnvelope className="me-3" />
-              info@example.com
+                          quickbite@keybase.com
             </p>
             <div className="d-flex pt-2">
-              <a className="btn btn-outline-light btn-social" href="">
+                          <a className="btn btn-outline-light btn-social" href="https://www.twitter.com">
                 <i className="fab">
                   <FaTwitter />
                 </i>
               </a>
-              <a className="btn btn-outline-light btn-social" href="">
+                          <a className="btn btn-outline-light btn-social" href="https://www.facebook.com">
                 <i className="fab">
                   <FaFacebookF />
                 </i>
               </a>
-              <a className="btn btn-outline-light btn-social" href="">
+                          <a className="btn btn-outline-light btn-social" href="https://www.youtube.com">
                 <i className="fab">
                   <FaYoutube />
                 </i>
               </a>
-              <a className="btn btn-outline-light btn-social" href="">
+                          <a className="btn btn-outline-light btn-social" href="https://www.linkedin.com">
                 <i className="fab">
                   <FaLinkedinIn />
                 </i>
               </a>
             </div>
           </div>
-          <div className="col-lg-3 col-md-6">
+                  <div className="col-lg-4 col-md-6">
             <h4 className="section-title ff-secondary text-start primaryColor fw-normal mb-4">
               Opening
             </h4>
@@ -85,29 +85,7 @@ function Footer() {
             <p>09AM - 09PM</p>
             <h5 className="text-light fw-normal">Sunday</h5>
             <p>10AM - 08PM</p>
-          </div>
-          <div className="col-lg-3 col-md-6">
-            <h4 className="section-title ff-secondary text-start primaryColor fw-normal mb-4">
-              Newsletter
-            </h4>
-            <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-            <div
-              className="position-relative mx-auto"
-              style={{ maxWidth: "400px" }}
-            >
-              <input
-                className="form-control primaryBorder w-100 py-3 ps-4 pe-5"
-                type="text"
-                placeholder="Your email"
-              />
-              <button
-                type="button"
-                className="btn primaryBtn py-2 position-absolute top-0 end-0 mt-2 me-2"
-              >
-                SignUp
-              </button>
-            </div>
-          </div>
+                  </div>
         </div>
       </div>
       <div className="container">
@@ -118,30 +96,12 @@ function Footer() {
               <a className="border-bottom" href="#">
                 Quick Bite
               </a>
-              , All Right Reserved. Designed By{" "}
-              <a className="border-bottom" href="https://htmlcodex.com">
-                HTML Codex,
-                <br /> Mohammad Amro and Nidal Jaafar
-              </a>
+                          , All Right Reserved. Designed By
+                          <br /> Mohammad Amro and Nidal Jaafar
               <br />
-              <br />
-              Distributed By{" "}
-              <a
-                className="border-bottom"
-                href="https://themewagon.com"
-                target="_blank"
-              >
-                ThemeWagon
-              </a>
+                          <br />
             </div>
-            <div className="col-md-6 text-center text-md-end">
-              <div className="footer-menu">
-                <a href="">Home</a>
-                <a href="">Cookies</a>
-                <a href="">Help</a>
-                <a href="">FQAs</a>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
