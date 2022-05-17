@@ -53,9 +53,11 @@ function AboutPage() {
                       name={member.full_name}
                       role1={member.position}
                       src={
-                        process.env.REACT_APP_API +
-                        "/storage/images/employees/" +
-                        member.image
+                        member.image != 0
+                          ? process.env.REACT_APP_API +
+                            "/storage/images/employees/" +
+                            member.image
+                          : team1
                       }
                       fb={member.fb_link}
                       twitter={member.twitter_link}

@@ -8,6 +8,9 @@ import {
   ADD_ITEM_SUCCESS,
   ADD_ITEM_REQUEST,
   ADD_ITEM_FAIL,
+  FETCH_TRENDING_REQUEST,
+  FETCH_TRENDING_SUCCESS,
+  FETCH_TRENDING_FAIL,
 } from "./menuTypes";
 
 import axios from "axios";
@@ -115,5 +118,26 @@ export const editMenu = (body) => async (dispatch) => {
     dispatch(getMenus());
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const getTrendingItems = () => async (dispatch) => {
+  dispatch({
+    type: FETCH_TRENDING_REQUEST,
+  });
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_API + "/api/trending"
+    );
+    console.log(response.data);
+    dispatch({
+      type: FETCH_TRENDING_SUCCESS,
+      payload: response.data,
+    });
+  } catch (e) {
+    console.log(e);
+    dispatch({
+      type: FETCH_TRENDING_FAIL,
+    });
   }
 };

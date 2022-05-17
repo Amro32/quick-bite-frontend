@@ -19,6 +19,7 @@ import { getCurrencies } from "../../redux/currency/currencyActions";
 import Menu from "../Menu/Menu";
 import AddTeamMember from "../Team/AddTeamMember";
 import { useNavigate } from "react-router-dom";
+import team1 from "../../assets/team-1.jpg";
 
 function Home() {
   // Carousel configuration
@@ -278,9 +279,11 @@ function Home() {
                     name={member.full_name}
                     role1={member.position}
                     src={
-                      process.env.REACT_APP_API +
-                      "/storage/images/employees/" +
-                      member.image
+                      member.image != 0
+                        ? process.env.REACT_APP_API +
+                          "/storage/images/employees/" +
+                          member.image
+                        : team1
                     }
                     fb={member.fb_link}
                     twitter={member.twitter_link}
@@ -309,7 +312,7 @@ function Home() {
                 return (
                   <Testimonial
                     src={testimonial1}
-                    name={f.user.first_name + " " + f.user.last_name}
+                    name={f.user?.first_name + " " + f.user?.last_name}
                     text={f.details}
                     rating={f.rating}
                     key={i}
