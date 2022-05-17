@@ -132,7 +132,7 @@ export const getTrendingItems = () => async (dispatch) => {
     console.log(response.data);
     dispatch({
       type: FETCH_TRENDING_SUCCESS,
-      payload: response.data,
+      payload: response.data.items.data,
     });
   } catch (e) {
     console.log(e);
