@@ -59,9 +59,11 @@ function Menu({ menus, loadingMenus, currency, currencies, currencyRate }) {
           );
         })}
         {isAuthenticated && role !== "client" && (
-          <button className="btn primaryBtn" onClick={handleAddMenuOpen}>
-            + Add Menu
-          </button>
+          <div className="col d-flex align-items-center">
+            <button className="btn primaryBtn" onClick={handleAddMenuOpen}>
+              + Add Menu
+            </button>
+          </div>
         )}
       </ul>
       <div className="tab-content">

@@ -11,14 +11,19 @@ function AddItemModal({ showAddItem, handleAddItemClose, menu_id }) {
 
   const handle = (e) => {
     e.preventDefault();
-    dispatch(
-      addItem({
-        ...data,
-        menu_id: menu_id,
-        is_trending: false,
-        average_rating: 2.5,
-      })
-    );
+    let form = new FormData();
+    form.append("name", data.name);
+    form.append("details", data.details);
+    form.append("type", data.type);
+    form.append("base_price", data.base_price);
+    form.append("sale", data.sale);
+    for (let i = 0; i < data.images.length; i++) {
+      form.append("images[]", data.images[i]);
+    }
+    form.append("menu_id", menu_id);
+    form.append("average_rating", 2.5);
+
+    dispatch(addItem(form));
     handleAddItemClose();
   };
 
@@ -77,6 +82,16 @@ function AddItemModal({ showAddItem, handleAddItemClose, menu_id }) {
               type="number"
               required
               onChange={(e) => setData({ ...data, sale: e.target.value })}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="images">
+            <Form.Label>Images</Form.Label>
+            <Form.Control
+              type="file"
+              multiple
+              required
+              onChange={(e) => setData({ ...data, images: e.target.files })}
             />
           </Form.Group>
         </Modal.Body>

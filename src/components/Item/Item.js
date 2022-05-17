@@ -102,7 +102,18 @@ function Item() {
           <Title title={"Item Preview"} />
           <div className="itemImages">
             {data.images?.data?.map((im, i) => {
-              return <img src={food} className="itemImage" alt="" key={i} />;
+              return (
+                <img
+                  src={
+                    process.env.REACT_APP_API +
+                    "/storage/images/items/" +
+                    im.path
+                  }
+                  className="itemImage"
+                  alt=""
+                  key={i}
+                />
+              );
             })}
           </div>
           <Title title={"Order Item"} />

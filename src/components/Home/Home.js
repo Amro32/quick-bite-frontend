@@ -11,7 +11,7 @@ import About from "../About/About";
 import TeamMember from "../Team/TeamMember";
 import { Link } from "react-router-dom";
 import { getFeedbacks } from "../../redux/feedback/feedbackActions";
-import { getMenus } from "../../redux/menu/menuActions";
+import { getMenus, getTrendingItems } from "../../redux/menu/menuActions";
 import { getTeamMembers } from "../../redux/team/teamActions";
 import Loading from "../AssetComponents/Loading/Loading";
 import Title from "../AssetComponents/Title/Title";
@@ -19,6 +19,8 @@ import { getCurrencies } from "../../redux/currency/currencyActions";
 import Menu from "../Menu/Menu";
 import AddTeamMember from "../Team/AddTeamMember";
 import { useNavigate } from "react-router-dom";
+import team1 from "../../assets/team-1.jpg";
+import MenuItem from "../Menu/MenuItem";
 
 function Home() {
   // Carousel configuration
@@ -42,7 +44,9 @@ function Home() {
   };
 
   // menus data
-  const { menus, loadingMenus } = useSelector((state) => state.menuReducer);
+  const { menus, loadingMenus, trending, loadingTrending } = useSelector(
+    (state) => state.menuReducer
+  );
   // team members data
   const { team, loadingTeam } = useSelector((state) => state.teamReducer);
   //visit feedbacks or testimonials
@@ -64,6 +68,7 @@ function Home() {
     if (menus.length === 0) dispatch(getMenus());
     if (team.length === 0) dispatch(getTeamMembers());
     if (currencies.length === 0) dispatch(getCurrencies());
+    if (trending.length === 0) dispatch(getTrendingItems());
   }, []);
 
   return (
@@ -170,13 +175,24 @@ function Home() {
       <div className="container-xxl py-5">
         <div className="container">
           <Title title={"Food Menu"} subtitle={"Most Popular Items"} />
-          <Menu
-            menus={menus}
-            loadingMenus={loadingMenus}
-            currency={currency}
-            currencyRate={currencyRate}
-            currencies={currencies}
-          />
+          <div className="row g-4">
+            {trending.map((item, j) => {
+              return (
+                <MenuItem
+                  src={
+                    process.env.REACT_APP_API +
+                    "/storage/images/items/" +
+                    item.images?.data[0]?.path
+                  }
+                  currency={currency}
+                  currencyRate={currencyRate}
+                  key={j}
+                  item={item}
+                  menuid={0}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
       {/* <!-- Menu End --> */}
@@ -278,9 +294,11 @@ function Home() {
                     name={member.full_name}
                     role1={member.position}
                     src={
-                      process.env.REACT_APP_API +
-                      "/storage/images/employees/" +
-                      member.image
+                      member.image != 0
+                        ? process.env.REACT_APP_API +
+                          "/storage/images/employees/" +
+                          member.image
+                        : team1
                     }
                     fb={member.fb_link}
                     twitter={member.twitter_link}
@@ -309,7 +327,7 @@ function Home() {
                 return (
                   <Testimonial
                     src={testimonial1}
-                    name={f.user.first_name + " " + f.user.last_name}
+                    name={f.user?.first_name + " " + f.user?.last_name}
                     text={f.details}
                     rating={f.rating}
                     key={i}
